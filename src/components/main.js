@@ -3,16 +3,20 @@ import React, { useState } from "react";
 const Main = ({ tasks }) => {
   let initialCount = 0;
   const [count, setCount] = useState(initialCount);
-  const list = tasks.map((item, index) => {
-    if (index === count) {
-      return (
-        <>
-          <h1 className="text-[3em] text-[#fff] font-bold">{item.title}</h1>
-          <p className="text-[#fff]">{item.text}</p>
-        </>
-      );
+  function list() {
+    for (let i = 0; i < tasks.length; i++) {
+      if (i === count) {
+        return (
+          <>
+            <h1 className="text-[3em] text-[#fff] font-bold">
+              {tasks[i].title}
+            </h1>
+            <p className="text-[#fff]">{tasks[i].text}</p>
+          </>
+        );
+      }
     }
-  });
+  }
 
   function disablePre() {
     if (count === 0) {
@@ -29,7 +33,7 @@ const Main = ({ tasks }) => {
   return (
     <div className="h-[100vh] bg-[#343da3] flex items-center justify-center select-none">
       <div className="bg-[#5561E5] p-5 flex items-start justify-center flex-col w-6/12 rounded-lg">
-        {list}
+        {list()}
         <div className="flex space-x-7">
           <button
             onClick={() => setCount(initialCount)}
